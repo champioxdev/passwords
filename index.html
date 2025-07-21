@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PasswordGenerator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="background">
+        <div class="wrapper">
+            <div class="generator">
+            Password Generator<br><br>
+            <div class="length-wrapper">
+                <input type="range" min="10" max="16" value="12" id="length">
+                <script>
+                    const lengthInput = document.getElementById('length');
+                    lengthInput.addEventListener('input', function() {
+                        document.getElementById('lengthValue').textContent = this.value;
+                    });
+                </script>
+                <span id="lengthValue">12</span>
+            </div><br>
+            <button id="generate">🔒 Generate</button>
+            <script>
+                document.getElementById('generate').addEventListener('click', function() {
+                    const length = parseInt(document.getElementById('length').value);
+                    const charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+[]{}|;:,.<>?";
+                    let password = "";
+                    for (let i = 0; i < length; i++) {
+                        const randomIndex = Math.floor(Math.random() * charset.length);
+                        password += charset[randomIndex];
+                    }
+                    document.getElementById('generated').textContent = password;
+                });
+            </script>
+            </div>
+            <div class="output">
+                <span id="generated">Password</span>
+                <button id="reveal"><img class="hider" src="assets/eye-slash.svg"></button>
+                <script>
+                    document.getElementById('reveal').addEventListener('click', function() {
+                        const generated = document.getElementById('generated');
+                        const hider = document.getElementById('reveal').querySelector('.hider');
+                        if (generated.style.webkitTextSecurity == "none") {
+                            generated.style.webkitTextSecurity = "disc";
+                            hider.src = 'assets/eye-slash.svg';
+                        } else {
+                            generated.style.webkitTextSecurity = "none";
+                            hider.src = 'assets/eye.svg';
+                        }
+                    });
+                </script>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

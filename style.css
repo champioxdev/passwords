@@ -1,0 +1,136 @@
+body {
+    margin: 0;
+    height: 100vh;
+    width: 100vw;
+    font-family: monospace;
+    color: #ffffff;
+    background-color: #11111b;
+    overflow: hidden;
+    display: grid;
+    place-items: center;
+}
+
+.background {
+    background-color: #181825;
+    margin: 2em;
+    border-radius: 14px;
+    width: calc(100% - 4em);
+    height: calc(100% - 4em);
+    display: grid;
+    place-items: center;
+}
+
+.wrapper {
+    display: grid;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5em;
+}
+
+.output {
+    border: #313244 solid 3px;
+    background-color: #1e1e2e;
+    color: #ffffff;
+    font-size: 2em;
+    border-radius: 14px;
+    display: grid;
+    place-items: center;
+    grid-template-columns: 85% 15%;
+    overflow: hidden;
+    transition: all 250ms ease-out;
+}
+
+.generator {
+    border: #313244 solid 3px;
+    padding: 1em;
+    background-color: #1e1e2e;
+    color: #ffffff;
+    font-size: 1.5em;
+    border-radius: 14px;
+    text-align: center;
+}
+
+#generated {
+    -webkit-text-security: disc;
+    transition: all 250ms ease-out;
+    font-size: 16px;
+}
+#generated:hover {
+    -webkit-text-security: none;
+    cursor: text;
+}
+
+#reveal {
+    background-color: transparent;
+    color: #ffffff;
+    border: none;
+    font-size: 0.75em;
+    transform: translate(-5%, 0%);
+    text-align: end;
+    cursor: pointer;
+    transition: all 250ms ease-out;
+    padding: 0.25em;
+    aspect-ratio: 1/1;
+    width: 110%;
+    height: 110%;
+    background-color:#313244;
+}
+#reveal:hover {
+    background-color: #89b4fa;
+    border-color: #89b4fa;
+
+}
+
+.output:has(#reveal:hover) {
+    border-color: #89b4fa;
+}
+
+.length-wrapper {
+    display: grid;
+    grid-template-columns: 85% 15%;
+    align-items: center;
+    margin: 0.5em 0em;
+    gap: 0.5em;
+}
+
+#generate {
+    border: #45475a 2px solid;
+    background-color: #1e1e2e;
+    color: #ffffff;
+    padding: 0.5em 1em;
+    font-family: monospace;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 250ms ease-out;
+}
+#generate:hover {
+    border-color: #89b4fa;
+}
+
+.hider {
+    aspect-ratio: 1/1;
+    width: 80%;
+    transform: translate(-10%, 15%);
+}
+
+#length {
+    cursor: ew-resize;
+    transition: all 250ms ease-out;
+    background-color: transparent;
+}
+#length::-moz-range-track {
+    background-color: #313244;
+    height: 10px;
+    border-radius: 100px;
+}
+#length::-moz-range-progress {
+    background-color: #89b4fa;
+    height: 10px;
+    border-radius: 100px 0 0 100px;
+}
+#length::-moz-range-thumb {
+    background-color: #ffffff;
+    width: 10px;
+    height: 10px;
+    border-color: transparent;;
+}
