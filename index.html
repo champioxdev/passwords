@@ -7,36 +7,53 @@
     <link rel="stylesheet" href="style.css">
     <link rel="icon" href="assets/icon.ico" type="image/x-icon">
     <link rel="apple-touch-icon" href="assets/icon.png">
-    <meta name="theme-color" content="#89b4fa>
+    <meta name="theme-color" content="#89b4fa">
 </head>
 <body>
+    <script>
+        function setTheme(id) {
+            let json = fetch('themes.json')
+            .then(response => response.json())
+            .then(data => {
+                document.documentElement.style.setProperty('--primary', data[id].primary);
+                document.documentElement.style.setProperty('--background-0', data[id].background_0);
+                document.documentElement.style.setProperty('--background-1', data[id].background_1);
+                document.documentElement.style.setProperty('--background-2', data[id].background_2);
+                document.documentElement.style.setProperty('--text', data[id].text);
+                document.documentElement.style.setProperty('--border-0', data[id].border_0);
+                document.documentElement.style.setProperty('--border-1', data[id].border_1);
+            });
+            localStorage.setItem('theme', id);
+        }
+        setTheme(localStorage.getItem('theme') || 'catpuccin');
+    </script>
     <div class="background">
         <div class="wrapper">
             <div class="generator">
-            Password Generator<br><br>
-            <div class="length-wrapper">
-                <input type="range" min="10" max="16" value="12" id="length">
+                Password Generator<br><br>
+                <div class="length-wrapper">
+                    <input type="range" min="8" max="18" value="12" id="length">
+                    <script>
+                        const lengthInput = document.getElementById('length');
+                        lengthInput.addEventListener('input', function() {
+                            document.getElementById('lengthValue').textContent = this.value;
+                        });
+                    </script>
+                    <span id="lengthValue">12</span>
+                </div><br>
+                <button id="generate">🔒 Generate</button>
                 <script>
-                    const lengthInput = document.getElementById('length');
-                    lengthInput.addEventListener('input', function() {
-                        document.getElementById('lengthValue').textContent = this.value;
+                    document.getElementById('generate').addEventListener('click', function() {
+                        const length = parseInt(document.getElementById('length').value);
+                        const charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+[]{}|;:,.<>?";
+                        let password = "";
+                        for (let i = 0; i < length; i++) {
+                            const randomIndex = Math.floor(Math.random() * charset.length);
+                            password += charset[randomIndex];
+                        }
+                        document.getElementById('generated').textContent = password;
                     });
                 </script>
-                <span id="lengthValue">12</span>
-            </div><br>
-            <button id="generate">🔒 Generate</button>
-            <script>
-                document.getElementById('generate').addEventListener('click', function() {
-                    const length = parseInt(document.getElementById('length').value);
-                    const charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+[]{}|;:,.<>?";
-                    let password = "";
-                    for (let i = 0; i < length; i++) {
-                        const randomIndex = Math.floor(Math.random() * charset.length);
-                        password += charset[randomIndex];
-                    }
-                    document.getElementById('generated').textContent = password;
-                });
-            </script>
             </div>
             <div class="output">
                 <span id="generated">Password</span>
@@ -54,6 +71,25 @@
                         }
                     });
                 </script>
+            </div>
+            <div class="theme-selector">
+                <select id="theme" onchange="setTheme(this.value)">
+                    <script>
+                        const themeSelect = document.getElementById('theme');
+                        fetch('themes.json')
+                        .then(response => response.json())
+                        .then(data => {
+                            for (const id in data) {
+                                const option = document.createElement('option');
+                                if (localStorage.getItem('theme') === id) { option.selected = true; }
+                                option.value = id;
+                                option.textContent = data[id].name;
+                                themeSelect.appendChild(option);
+                            }
+                        })
+                        .catch(error => console.error('Error loading themes:', error));
+                        </script>
+                </select>
             </div>
         </div>
     </div>

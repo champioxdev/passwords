@@ -1,21 +1,25 @@
+* {
+    transition: all 250ms ease-out;
+}
+
 body {
     margin: 0;
     height: 100vh;
     width: 100vw;
     font-family: monospace;
-    color: #ffffff;
-    background-color: #11111b;
+    color: var(--text);
+    background-color: var(--background-0);
     overflow: hidden;
     display: grid;
     place-items: center;
 }
 
 .background {
-    background-color: #181825;
+    background-color: var(--background-1);
     margin: 2em;
     border-radius: 14px;
-    width: calc(100% - 4em);
-    height: calc(100% - 4em);
+    width: calc(100vw - 4em);
+    height: calc(100vh - 4em);   
     display: grid;
     place-items: center;
 }
@@ -28,9 +32,9 @@ body {
 }
 
 .output {
-    border: #313244 solid 3px;
-    background-color: #1e1e2e;
-    color: #ffffff;
+    border: var(--border-0) solid 3px;
+    background-color: var(--background-2);
+    color: var(--text);
     font-size: 2em;
     border-radius: 14px;
     display: grid;
@@ -41,10 +45,10 @@ body {
 }
 
 .generator {
-    border: #313244 solid 3px;
+    border: var(--border-0) solid 3px;
     padding: 1em;
-    background-color: #1e1e2e;
-    color: #ffffff;
+    background-color: var(--background-2);
+    color: var(--text);
     font-size: 1.5em;
     border-radius: 14px;
     text-align: center;
@@ -62,7 +66,7 @@ body {
 
 #reveal {
     background-color: transparent;
-    color: #ffffff;
+    color: var(--text);
     border: none;
     font-size: 0.75em;
     transform: translate(-5%, 0%);
@@ -71,18 +75,18 @@ body {
     transition: all 250ms ease-out;
     padding: 0.25em;
     aspect-ratio: 1/1;
-    width: 110%;
+    width: 115%;
     height: 110%;
-    background-color:#313244;
+    background-color:var(--border-0);
 }
 #reveal:hover {
-    background-color: #89b4fa;
-    border-color: #89b4fa;
+    background-color: var(--primary);
+    border-color: var(--primary);
 
 }
 
 .output:has(#reveal:hover) {
-    border-color: #89b4fa;
+    border-color: var(--primary);
 }
 
 .length-wrapper {
@@ -94,9 +98,9 @@ body {
 }
 
 #generate {
-    border: #45475a 2px solid;
-    background-color: #1e1e2e;
-    color: #ffffff;
+    border: var(--border-1) 2px solid;
+    background-color: var(--background-2);
+    color: var(--text);
     padding: 0.5em 1em;
     font-family: monospace;
     border-radius: 10px;
@@ -104,7 +108,7 @@ body {
     transition: all 250ms ease-out;
 }
 #generate:hover {
-    border-color: #89b4fa;
+    border-color: var(--primary);
 }
 
 .hider {
@@ -119,18 +123,29 @@ body {
     background-color: transparent;
 }
 #length::-moz-range-track {
-    background-color: #313244;
+    background-color: var(--border-0);
     height: 10px;
     border-radius: 100px;
 }
 #length::-moz-range-progress {
-    background-color: #89b4fa;
+    background-color: var(--primary);
     height: 10px;
     border-radius: 100px 0 0 100px;
 }
 #length::-moz-range-thumb {
-    background-color: #ffffff;
+    background-color: var(--text);
     width: 10px;
     height: 10px;
-    border-color: transparent;;
+    border-color: transparent;
+}
+
+select {
+    color: var(--text);
+    padding: 0.75em;
+    font-family: monospace;
+    text-align: center;
+    border-radius: 14px;
+    border: var(--border-0) solid 3px;
+    width: 100%;
+    background-color: var(--background-2);
 }
